@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 
-@Controller
+@RestController
 @RequestMapping("${PathConstants.BASE_PATH}${PathConstants.QUOTES_BASE_PATH}")
 class QuotesController {
 
