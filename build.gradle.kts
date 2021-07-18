@@ -1,3 +1,4 @@
+import extensions.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -8,8 +9,8 @@ plugins {
     kotlin("plugin.jpa") version "1.5.20"
 }
 
-group = "com.ferum_bot"
-version = "0.0.1-SNAPSHOT"
+group = Config.GROUP
+version = Config.VERSION
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 configurations {
@@ -23,19 +24,15 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-data-rest")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    compileOnly("org.projectlombok:lombok")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("com.h2database:h2")
-    runtimeOnly("org.postgresql:postgresql")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-    annotationProcessor("org.projectlombok:lombok")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    addAllStarters()
+
+    addJackson()
+
+    addKotlinDependencies()
+
+    addDatabases()
+
+    addHelpers()
 }
 
 tasks.withType<KotlinCompile> {
