@@ -1,4 +1,4 @@
-package com.ferum_bot.quotesapi
+package com.ferum_bot.quotesapi.application
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
