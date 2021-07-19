@@ -6,9 +6,7 @@ import com.ferum_bot.quotesapi.handlers.security.SecurityHandler
 import com.ferum_bot.quotesapi.interactors.TagsControllerInteractor
 import com.ferum_bot.quotesapi.util.PathConstants
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -35,7 +33,7 @@ class TagsController {
         @RequestHeader(value = "Platform", required = false, defaultValue = "Undefined")
         platform: String,
     ): ResponseEntity<*> {
-        val keyIsValid = securityHandler.checkTheSecretKey(secretKey)
+        val keyIsValid = securityHandler.checkTheGetSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidSecretKey()
         }

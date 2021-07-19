@@ -1,8 +1,10 @@
 package com.ferum_bot.quotesapi.configurations
 
+import com.ferum_bot.quotesapi.interactors.AdminControllerInteractor
 import com.ferum_bot.quotesapi.interactors.AuthorsControllerInteractor
 import com.ferum_bot.quotesapi.interactors.QuotesControllerInteractor
 import com.ferum_bot.quotesapi.interactors.TagsControllerInteractor
+import com.ferum_bot.quotesapi.interactors.impl.AdminControllerInteractorImpl
 import com.ferum_bot.quotesapi.interactors.impl.AuthorsControllerInteractorImpl
 import com.ferum_bot.quotesapi.interactors.impl.QuotesControllerInteractorImpl
 import com.ferum_bot.quotesapi.interactors.impl.TagsControllerInteractorImpl
@@ -34,5 +36,12 @@ class InteractorsConfig {
         repository: QuotesRepository
     ): QuotesControllerInteractor {
         return QuotesControllerInteractorImpl(repository)
+    }
+
+    @Bean
+    fun provideAdminControllerInteractor(
+
+    ): AdminControllerInteractor {
+        return AdminControllerInteractorImpl()
     }
 }

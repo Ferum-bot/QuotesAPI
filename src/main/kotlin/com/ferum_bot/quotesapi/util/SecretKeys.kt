@@ -5,4 +5,6 @@ object SecretKeys {
     const val PROD_KEY = "TryToBootTrapIt!"
 
     const val DEBUG_KEY = "DebugDebugNobodyWillBug!"
+
+    const val ADMIN_KEY = "ThisIsTheAdminKeyToAccessAPI"
 }

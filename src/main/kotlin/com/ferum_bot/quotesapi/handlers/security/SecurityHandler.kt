@@ -5,6 +5,10 @@ interface SecurityHandler {
     /**
      * Returns true if secret key is valid.
      */
-    fun checkTheSecretKey(key: String): Boolean
+    fun checkTheGetSecretKey(key: String): Boolean
 
+    /**
+     * Returns true if admin secret key is valid.
+     */
+    fun checkTheAdminSecretKey(key: String): Boolean
 }

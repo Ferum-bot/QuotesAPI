@@ -5,7 +5,7 @@ import com.ferum_bot.quotesapi.util.SecretKeys
 
 class BaseSecurityHandler: SecurityHandler{
 
-    override fun checkTheSecretKey(key: String): Boolean {
+    override fun checkTheGetSecretKey(key: String): Boolean {
         if (key == SecretKeys.DEBUG_KEY) {
             return true
         }

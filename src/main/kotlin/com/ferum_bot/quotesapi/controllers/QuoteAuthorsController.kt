@@ -7,7 +7,6 @@ import com.ferum_bot.quotesapi.interactors.AuthorsControllerInteractor
 import com.ferum_bot.quotesapi.util.PathConstants
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
-import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -34,7 +33,7 @@ class QuoteAuthorsController {
         @RequestHeader(value = "Platform", required = false, defaultValue = "Undefined")
         platform: String,
     ): ResponseEntity<*> {
-        val keyIsValid = securityHandler.checkTheSecretKey(secretKey)
+        val keyIsValid = securityHandler.checkTheGetSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidSecretKey()
         }
@@ -58,7 +57,7 @@ class QuoteAuthorsController {
         @RequestParam(value = "size")
         size: Int,
     ): ResponseEntity<*> {
-        val keyIsValid = securityHandler.checkTheSecretKey(secretKey)
+        val keyIsValid = securityHandler.checkTheGetSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidSecretKey()
         }
@@ -90,7 +89,7 @@ class QuoteAuthorsController {
         @RequestParam(value = "size")
         size: Int,
     ): ResponseEntity<*> {
-        val keyIsValid = securityHandler.checkTheSecretKey(secretKey)
+        val keyIsValid = securityHandler.checkTheGetSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidSecretKey()
         }

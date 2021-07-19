@@ -4,12 +4,10 @@ import com.ferum_bot.quotesapi.handlers.business.PlatformHandler
 import com.ferum_bot.quotesapi.handlers.errors.ErrorHandler
 import com.ferum_bot.quotesapi.handlers.security.SecurityHandler
 import com.ferum_bot.quotesapi.interactors.QuotesControllerInteractor
-import com.ferum_bot.quotesapi.models.MainScreenModel
 import com.ferum_bot.quotesapi.models.response.QuotesResponse
 import com.ferum_bot.quotesapi.util.PathConstants
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
-import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -39,7 +37,7 @@ class QuotesController {
         @RequestParam(value = "quotesCount")
         quotesCount: Int,
     ): ResponseEntity<*> {
-        val keyIsValid = securityHandler.checkTheSecretKey(secretKey)
+        val keyIsValid = securityHandler.checkTheGetSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidSecretKey()
         }
@@ -63,7 +61,7 @@ class QuotesController {
         @RequestParam(value = "count")
         quotesCount: Int,
     ): ResponseEntity<*> {
-        val keyIsValid = securityHandler.checkTheSecretKey(secretKey)
+        val keyIsValid = securityHandler.checkTheGetSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidSecretKey()
         }
@@ -84,7 +82,7 @@ class QuotesController {
         @RequestHeader(value = "Platform", required = false, defaultValue = "Undefined")
         platform: String,
     ): ResponseEntity<*> {
-        val keyIsValid = securityHandler.checkTheSecretKey(secretKey)
+        val keyIsValid = securityHandler.checkTheGetSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidSecretKey()
         }
@@ -108,7 +106,7 @@ class QuotesController {
         @RequestParam(value = "size")
         size: Int,
     ): ResponseEntity<*> {
-        val keyIsValid = securityHandler.checkTheSecretKey(secretKey)
+        val keyIsValid = securityHandler.checkTheGetSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidSecretKey()
         }
@@ -135,7 +133,7 @@ class QuotesController {
         @RequestParam(value = "tag")
         tag: String,
     ): ResponseEntity<*> {
-        val keyIsValid = securityHandler.checkTheSecretKey(secretKey)
+        val keyIsValid = securityHandler.checkTheGetSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidSecretKey()
         }
@@ -156,7 +154,7 @@ class QuotesController {
         @RequestParam(value = "author")
         author: String,
     ): ResponseEntity<*> {
-        val keyIsValid = securityHandler.checkTheSecretKey(secretKey)
+        val keyIsValid = securityHandler.checkTheGetSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidSecretKey()
         }

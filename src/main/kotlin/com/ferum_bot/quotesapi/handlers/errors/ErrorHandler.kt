@@ -19,4 +19,5 @@ interface ErrorHandler {
 
     fun handleBadRequest(getMessage: () -> String): ResponseEntity<QuotesResponse<Nothing>>
 
+    fun handleInvalidAdminKey(): ResponseEntity<QuotesResponse<Nothing>>
 }
