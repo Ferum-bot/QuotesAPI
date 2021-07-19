@@ -8,7 +8,10 @@ import org.springframework.data.jpa.repository.Query
 
 interface AuthorsDataSource: JpaRepository<AuthorEntity, Long> {
 
-    @Query("SELECT AuthorEntity FROM AuthorEntity WHERE authorFullName LIKE ?1")
+    @Query(
+        value = "SELECT ALL FROM author_entity WHERE author_full_name=?1",
+        nativeQuery = true,
+    )
     fun getAllAuthorsWhereNameContains(text: String, pageable: Pageable): Page<AuthorEntity>
 
 }

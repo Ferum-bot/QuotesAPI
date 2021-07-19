@@ -42,31 +42,6 @@ class RepositoryConfig {
     private lateinit var tagsDataSource: TagsDataSource
 
     @Bean
-    fun provideDataSource(): DataSource {
-        val builder = EmbeddedDatabaseBuilder()
-        return builder.setType(EmbeddedDatabaseType.HSQL).build()
-    }
-
-    @Bean
-    fun provideLocalContainerManager(): LocalContainerEntityManagerFactoryBean {
-        val vendorAdapter = HibernateJpaVendorAdapter()
-        vendorAdapter.setGenerateDdl(true)
-
-        val factory = LocalContainerEntityManagerFactoryBean()
-        factory.jpaVendorAdapter = vendorAdapter
-        factory.dataSource = provideDataSource()
-        factory.setPackagesToScan("com.ferum_bot.quotesapi.repository.jpa")
-        return factory
-    }
-
-    @Bean
-    fun provideTransactionManager(factory: EntityManagerFactory): PlatformTransactionManager {
-        val txManager = JpaTransactionManager()
-        txManager.entityManagerFactory = factory
-        return txManager
-    }
-
-    @Bean
     fun provideQuotesRepository(adapter: QuotesDataSourceAdapter): QuotesRepository {
         return QuotesRepositoryImpl(
             quotesDataSource, tagsDataSource, authorsDataSource, adapter

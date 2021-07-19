@@ -7,12 +7,21 @@ import org.springframework.data.repository.CrudRepository
 
 interface QuotesDataSource: JpaRepository<QuoteEntity, Long> {
 
-    @Query("SELECT id FROM QuoteEntity")
+    @Query(
+        value = "SELECT id FROM quote_entity",
+        nativeQuery = true
+    )
     fun getAllAvailableIds(): List<Long>
 
-    @Query("SELECT QuoteEntity FROM QuoteEntity WHERE author.authorFullName = ?1")
+    @Query(
+        value = "SELECT ALL FROM QuoteEntity WHERE author.authorFullName = ?1",
+        nativeQuery = true
+    )
     fun getAllWhereAuthorIs(authorName: String): List<QuoteEntity>
 
-    @Query("SELECT QuoteEntity FROM QuoteEntity  WHERE tag.tagName = ?1")
+    @Query(
+        value = "SELECT ALL FROM QuoteEntity  WHERE tag.tagName = ?1",
+        nativeQuery = true,
+    )
     fun getAllWhereTagIs(tag: String): List<QuoteEntity>
 }

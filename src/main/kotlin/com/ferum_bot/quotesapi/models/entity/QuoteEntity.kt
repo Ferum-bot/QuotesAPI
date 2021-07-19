@@ -15,12 +15,10 @@ data class QuoteEntity(
 
     var text: String,
 
-    @Column(name = "author")
     @ManyToOne
     @JoinColumn(name = "author_entity_id", referencedColumnName = "id")
     var author: AuthorEntity? = null,
 
-    @Column(name = "tag")
     @ManyToOne
     @JoinColumn(name = "tag_entity_id", referencedColumnName = "id")
     var tag: TagEntity? = null,

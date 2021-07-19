@@ -32,7 +32,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
     AuthorsDataSource::class,
     TagsDataSource::class,
 ])
-@EnableTransactionManagement
 class QuotesApiApplication
 
 fun main(args: Array<String>) {
