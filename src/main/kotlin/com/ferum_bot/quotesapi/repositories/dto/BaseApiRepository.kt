@@ -1,4 +1,4 @@
-package com.ferum_bot.quotesapi.repositories
+package com.ferum_bot.quotesapi.repositories.dto
 
 interface BaseApiRepository {
 

@@ -102,25 +102,25 @@ class QuotesController {
         @RequestHeader(value = "Platform", required = false, defaultValue = "Undefined")
         platform: String,
 
-        @RequestParam(value = "startOffset")
-        startOffset: Int,
+        @RequestParam(value = "page")
+        page: Int,
 
-        @RequestParam(value = "count")
-        count: Int,
+        @RequestParam(value = "size")
+        size: Int,
     ): ResponseEntity<*> {
         val keyIsValid = securityHandler.checkTheSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidSecretKey()
         }
-        if (startOffset < 0) {
+        if (page < 0) {
             return errorHandler.handleBadRequest { "Offset can't be under zero." }
         }
-        if (count < 0) {
+        if (size < 0) {
             return errorHandler.handleBadRequest { "Quotes count can't be under zero." }
         }
         platformHandler.processThePlatform(platform)
 
-        val response = interactor.getQuotesFrom(startOffset, count)
+        val response = interactor.getQuotesFrom(page, size)
         return ResponseEntity.ok(response)
     }
 

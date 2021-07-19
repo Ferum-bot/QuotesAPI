@@ -12,7 +12,7 @@ interface QuotesControllerInteractor {
 
     fun getAllQuotes(): QuotesResponse<Collection<QuoteDTO>>
 
-    fun getQuotesFrom(startOffset: Int, count: Int): QuotesResponse<Collection<QuoteDTO>>
+    fun getQuotesFrom(page: Int, size: Int): QuotesResponse<Collection<QuoteDTO>>
 
     fun getQuotesWithTag(tag: String): QuotesResponse<Collection<QuoteDTO>>
 

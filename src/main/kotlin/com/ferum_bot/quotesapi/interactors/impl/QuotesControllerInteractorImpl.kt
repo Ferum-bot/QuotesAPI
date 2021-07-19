@@ -4,7 +4,7 @@ import com.ferum_bot.quotesapi.interactors.QuotesControllerInteractor
 import com.ferum_bot.quotesapi.models.MainScreenModel
 import com.ferum_bot.quotesapi.models.dto.QuoteDTO
 import com.ferum_bot.quotesapi.models.response.QuotesResponse
-import com.ferum_bot.quotesapi.repositories.QuotesRepository
+import com.ferum_bot.quotesapi.repositories.dto.QuotesRepository
 
 class QuotesControllerInteractorImpl(
     private val repository: QuotesRepository
@@ -60,8 +60,8 @@ class QuotesControllerInteractorImpl(
         )
     }
 
-    override fun getQuotesFrom(startOffset: Int, count: Int): QuotesResponse<Collection<QuoteDTO>> {
-        val quotes = repository.getQuotesFrom(startOffset, count)
+    override fun getQuotesFrom(page: Int, size: Int): QuotesResponse<Collection<QuoteDTO>> {
+        val quotes = repository.getQuotesFrom(page, size)
 
         return QuotesResponse(
             error = null,

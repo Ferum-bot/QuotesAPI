@@ -7,5 +7,7 @@ interface AuthorsControllerInteractor {
 
     fun getAllAuthors(): QuotesResponse<Collection<AuthorDTO>>
 
-    fun getAllAuthorsFrom(startOffset: Int, count: Int): QuotesResponse<Collection<AuthorDTO>>
+    fun getAllAuthorsFrom(page: Int, size: Int): QuotesResponse<Collection<AuthorDTO>>
+
+    fun searchAuthors(name: String, page: Int, size: Int): QuotesResponse<Collection<AuthorDTO>>
 }

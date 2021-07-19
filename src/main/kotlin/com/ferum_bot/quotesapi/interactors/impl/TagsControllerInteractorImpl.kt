@@ -3,7 +3,7 @@ package com.ferum_bot.quotesapi.interactors.impl
 import com.ferum_bot.quotesapi.interactors.TagsControllerInteractor
 import com.ferum_bot.quotesapi.models.dto.TagDTO
 import com.ferum_bot.quotesapi.models.response.QuotesResponse
-import com.ferum_bot.quotesapi.repositories.TagsRepository
+import com.ferum_bot.quotesapi.repositories.dto.TagsRepository
 
 class TagsControllerInteractorImpl(
     private val repository: TagsRepository

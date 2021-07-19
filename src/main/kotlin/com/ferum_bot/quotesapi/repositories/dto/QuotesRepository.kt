@@ -1,6 +1,7 @@
-package com.ferum_bot.quotesapi.repositories
+package com.ferum_bot.quotesapi.repositories.dto
 
 import com.ferum_bot.quotesapi.models.dto.QuoteDTO
+import com.ferum_bot.quotesapi.repositories.dto.BaseApiRepository
 
 interface QuotesRepository: BaseApiRepository {
 
@@ -8,7 +9,7 @@ interface QuotesRepository: BaseApiRepository {
 
     fun getRandomQuotes(count: Int): Collection<QuoteDTO>
 
-    fun getQuotesFrom(start: Int, count: Int): Collection<QuoteDTO>
+    fun getQuotesFrom(page: Int, size: Int): Collection<QuoteDTO>
 
     fun getQuotesWithTag(tag: String): Collection<QuoteDTO>
 

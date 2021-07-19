@@ -3,7 +3,7 @@ package com.ferum_bot.quotesapi.interactors.impl
 import com.ferum_bot.quotesapi.interactors.AuthorsControllerInteractor
 import com.ferum_bot.quotesapi.models.dto.AuthorDTO
 import com.ferum_bot.quotesapi.models.response.QuotesResponse
-import com.ferum_bot.quotesapi.repositories.AuthorsRepository
+import com.ferum_bot.quotesapi.repositories.dto.AuthorsRepository
 
 class AuthorsControllerInteractorImpl(
     private val repository: AuthorsRepository
@@ -30,8 +30,8 @@ class AuthorsControllerInteractorImpl(
         )
     }
 
-    override fun getAllAuthorsFrom(startOffset: Int, count: Int): QuotesResponse<Collection<AuthorDTO>> {
-        val authors = repository.getAuthorsFrom(startOffset, count)
+    override fun getAllAuthorsFrom(page: Int, size: Int): QuotesResponse<Collection<AuthorDTO>> {
+        val authors = repository.getAuthorsFrom(page, size)
 
         return QuotesResponse(
             error = null,
@@ -42,4 +42,15 @@ class AuthorsControllerInteractorImpl(
         )
     }
 
+    override fun searchAuthors(name: String, page: Int, size: Int): QuotesResponse<Collection<AuthorDTO>> {
+        val authors = repository.searchAuthors(name, page, size)
+
+        return QuotesResponse(
+            error = null,
+            data = authors,
+            numberOfAuthors = availableAuthorsCount,
+            numberOfTags = availableTagsCount,
+            numberOfQuotes = availableQuotesCount,
+        )
+    }
 }

@@ -6,9 +6,9 @@ import com.ferum_bot.quotesapi.interactors.TagsControllerInteractor
 import com.ferum_bot.quotesapi.interactors.impl.AuthorsControllerInteractorImpl
 import com.ferum_bot.quotesapi.interactors.impl.QuotesControllerInteractorImpl
 import com.ferum_bot.quotesapi.interactors.impl.TagsControllerInteractorImpl
-import com.ferum_bot.quotesapi.repositories.AuthorsRepository
-import com.ferum_bot.quotesapi.repositories.QuotesRepository
-import com.ferum_bot.quotesapi.repositories.TagsRepository
+import com.ferum_bot.quotesapi.repositories.dto.AuthorsRepository
+import com.ferum_bot.quotesapi.repositories.dto.QuotesRepository
+import com.ferum_bot.quotesapi.repositories.dto.TagsRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 

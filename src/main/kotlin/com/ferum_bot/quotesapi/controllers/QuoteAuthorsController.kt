@@ -52,24 +52,59 @@ class QuoteAuthorsController {
         @RequestHeader(value = "Platform", required = false, defaultValue = "Undefined")
         platform: String,
 
-        @RequestParam(value = "startOffset")
-        startOffset: Int,
+        @RequestParam(value = "page")
+        page: Int,
 
-        @RequestParam(value = "count")
-        count: Int,
+        @RequestParam(value = "size")
+        size: Int,
     ): ResponseEntity<*> {
         val keyIsValid = securityHandler.checkTheSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidSecretKey()
         }
-        if (startOffset < 0) {
+        if (page < 0) {
             return errorHandler.handleBadRequest { "Offset can't be under zero." }
         }
-        if (count < 0) {
+        if (size < 0) {
             return errorHandler.handleBadRequest { "Count can't be under zero." }
         }
 
-        val response = interactor.getAllAuthorsFrom(startOffset, count)
+        val response = interactor.getAllAuthorsFrom(page, size)
+        return ResponseEntity.ok(response)
+    }
+
+    @GetMapping("/searchFrom")
+    fun searchAuthorsFrom(
+        @RequestHeader(value = "Secret-Key", required = true)
+        secretKey: String,
+
+        @RequestHeader(value = "Platform", required = false, defaultValue = "Undefined")
+        platform: String,
+
+        @RequestParam(value = "text")
+        text: String,
+
+        @RequestParam(value = "page")
+        page: Int,
+
+        @RequestParam(value = "size")
+        size: Int,
+    ): ResponseEntity<*> {
+        val keyIsValid = securityHandler.checkTheSecretKey(secretKey)
+        if (!keyIsValid) {
+            return errorHandler.handleInvalidSecretKey()
+        }
+        if (text.isBlank()) {
+            return errorHandler.handleBadRequest { "Search text can't be empty." }
+        }
+        if (page < 0) {
+            return errorHandler.handleBadRequest { "Offset can't be under zero." }
+        }
+        if (size < 0) {
+            return errorHandler.handleBadRequest { "Count can't be under zero." }
+        }
+
+        val response = interactor.searchAuthors(text, page, size)
         return ResponseEntity.ok(response)
     }
 
