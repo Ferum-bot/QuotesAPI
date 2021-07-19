@@ -18,9 +18,9 @@ data class AuthorEntity(
     @OneToMany(mappedBy = "author")
     val quotes: MutableList<QuoteEntity> = mutableListOf(),
 
-    var createdDate: LocalDateTime,
+    var createdDate: LocalDateTime? = null,
 
-    var updatedDate: LocalDateTime,
+    var updatedDate: LocalDateTime? = null,
 ) {
 
     override fun equals(other: Any?): Boolean {
@@ -41,5 +41,16 @@ data class AuthorEntity(
 
     fun enrollQuote(quote: QuoteEntity) {
         quotes.add(quote)
+    }
+
+    @PrePersist
+    fun onCreate() {
+        createdDate = LocalDateTime.now()
+        updatedDate = LocalDateTime.now()
+    }
+
+    @PreUpdate
+    fun onUpdate() {
+        updatedDate = LocalDateTime.now()
     }
 }
