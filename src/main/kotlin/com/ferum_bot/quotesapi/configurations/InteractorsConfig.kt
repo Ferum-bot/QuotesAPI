@@ -1,5 +1,6 @@
 package com.ferum_bot.quotesapi.configurations
 
+import com.ferum_bot.quotesapi.handlers.errors.CreateEntityErrorHandler
 import com.ferum_bot.quotesapi.interactors.AdminControllerInteractor
 import com.ferum_bot.quotesapi.interactors.AuthorsControllerInteractor
 import com.ferum_bot.quotesapi.interactors.QuotesControllerInteractor
@@ -8,6 +9,7 @@ import com.ferum_bot.quotesapi.interactors.impl.AdminControllerInteractorImpl
 import com.ferum_bot.quotesapi.interactors.impl.AuthorsControllerInteractorImpl
 import com.ferum_bot.quotesapi.interactors.impl.QuotesControllerInteractorImpl
 import com.ferum_bot.quotesapi.interactors.impl.TagsControllerInteractorImpl
+import com.ferum_bot.quotesapi.repositories.dto.AdminRepository
 import com.ferum_bot.quotesapi.repositories.dto.AuthorsRepository
 import com.ferum_bot.quotesapi.repositories.dto.QuotesRepository
 import com.ferum_bot.quotesapi.repositories.dto.TagsRepository
@@ -40,8 +42,9 @@ class InteractorsConfig {
 
     @Bean
     fun provideAdminControllerInteractor(
-
+        repository: AdminRepository,
+        errorHandler: CreateEntityErrorHandler,
     ): AdminControllerInteractor {
-        return AdminControllerInteractorImpl()
+        return AdminControllerInteractorImpl(repository, errorHandler)
     }
 }

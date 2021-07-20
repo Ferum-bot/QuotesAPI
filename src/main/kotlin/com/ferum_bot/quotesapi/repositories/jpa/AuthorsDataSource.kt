@@ -14,4 +14,5 @@ interface AuthorsDataSource: JpaRepository<AuthorEntity, Long> {
     )
     fun getAllAuthorsWhereNameContains(text: String, pageable: Pageable): Page<AuthorEntity>
 
+    fun getAllByAuthorFullName(text: String): List<AuthorEntity>
 }

@@ -24,4 +24,6 @@ interface QuotesDataSource: JpaRepository<QuoteEntity, Long> {
         nativeQuery = true,
     )
     fun getAllWhereTagIs(tag: String): List<QuoteEntity>
+
+    fun getAllByText(text: String): List<QuoteEntity>
 }

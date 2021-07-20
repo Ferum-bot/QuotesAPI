@@ -15,4 +15,11 @@ class BaseSecurityHandler: SecurityHandler{
         return false
     }
 
+    override fun checkTheAdminSecretKey(key: String): Boolean {
+        if (key == SecretKeys.ADMIN_KEY) {
+            return true
+        }
+        return false
+    }
+
 }

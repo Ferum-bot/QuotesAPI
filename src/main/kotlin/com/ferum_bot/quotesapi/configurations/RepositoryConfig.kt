@@ -3,10 +3,12 @@ package com.ferum_bot.quotesapi.configurations
 import com.ferum_bot.quotesapi.repositories.adapters.AuthorsDataSourceAdapter
 import com.ferum_bot.quotesapi.repositories.adapters.QuotesDataSourceAdapter
 import com.ferum_bot.quotesapi.repositories.adapters.TagsDataSourceAdapter
+import com.ferum_bot.quotesapi.repositories.dto.AdminRepository
 import com.ferum_bot.quotesapi.repositories.dto.AuthorsRepository
 import com.ferum_bot.quotesapi.repositories.dto.QuotesRepository
 import com.ferum_bot.quotesapi.repositories.dto.TagsRepository
 import com.ferum_bot.quotesapi.repositories.dto.impl.AuthorsRepositoryImpl
+import com.ferum_bot.quotesapi.repositories.dto.impl.DefaultAdminRepository
 import com.ferum_bot.quotesapi.repositories.dto.impl.QuotesRepositoryImpl
 import com.ferum_bot.quotesapi.repositories.dto.impl.TagsRepositoryImpl
 import com.ferum_bot.quotesapi.repositories.jpa.AuthorsDataSource
@@ -59,6 +61,17 @@ class RepositoryConfig {
     fun provideAuthorsRepository(adapter: AuthorsDataSourceAdapter): AuthorsRepository {
         return AuthorsRepositoryImpl(
             quotesDataSource, tagsDataSource, authorsDataSource, adapter
+        )
+    }
+
+    @Bean
+    fun provideAdminRepository(
+        quotesDataSource: QuotesDataSource,
+        tagsDataSource: TagsDataSource,
+        authorsDataSource: AuthorsDataSource,
+    ): AdminRepository {
+        return DefaultAdminRepository(
+            quotesDataSource, tagsDataSource, authorsDataSource
         )
     }
 }

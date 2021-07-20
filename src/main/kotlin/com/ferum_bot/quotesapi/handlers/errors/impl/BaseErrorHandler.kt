@@ -11,7 +11,7 @@ class BaseErrorHandler: ErrorHandler {
 
     override fun handleException(ex: Exception?): ResponseEntity<QuotesResponse<Nothing>> {
         val errorText = ex?.localizedMessage ?: "Something went wrong!"
-        val errorResponse = ErrorResponse.getFrom(400, errorText)
+        val errorResponse = ErrorResponse.getFrom(403, errorText)
         val response = QuotesResponse(data = null, error = errorResponse)
         return ResponseEntity(response, HttpStatus.FORBIDDEN)
     }
@@ -25,7 +25,7 @@ class BaseErrorHandler: ErrorHandler {
         }
         val text = "Something went wrong!"
         val errorResponse = ErrorResponse(
-            statusCode = 400,
+            statusCode = 403,
             errorMessage = text,
             errors = errors.allErrors.map { it.toString() }
         )
@@ -48,7 +48,10 @@ class BaseErrorHandler: ErrorHandler {
         val errorText = getMessage.invoke()
         val errorResponse = ErrorResponse.getFrom(400, errorText)
         val response = QuotesResponse(data = null, error = errorResponse)
-        return ResponseEntity(response, HttpStatus.FORBIDDEN)
+        return ResponseEntity(response, HttpStatus.BAD_REQUEST)
     }
 
+    override fun handleInvalidAdminKey(): ResponseEntity<QuotesResponse<Nothing>> {
+        TODO("Not yet implemented")
+    }
 }
