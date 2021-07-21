@@ -1,5 +1,6 @@
 import extensions.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     id("org.springframework.boot") version "2.5.2"
@@ -38,6 +39,18 @@ dependencies {
 
 application {
     mainClass.set("package com.ferum_bot.quotesapi.application.QuotesApiApplication.kt")
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes("Main-Class" to "com.ferum_bot.quotesapi.application.QuotesApiApplication.kt")
+    }
+}
+
+tasks.withType<BootJar> {
+    manifest {
+        attributes("Main-Class" to "com.ferum_bot.quotesapi.application.QuotesApiApplication.kt")
+    }
 }
 
 tasks.withType<KotlinCompile> {
