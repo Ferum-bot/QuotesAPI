@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
     HandlersConfig::class,
     RepositoryConfig::class,
     AdapterConfig::class,
+    HerokuConfig::class,
 )
 @EntityScan(basePackageClasses = [
     QuoteEntity::class,

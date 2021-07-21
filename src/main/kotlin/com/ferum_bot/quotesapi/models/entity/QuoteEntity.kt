@@ -3,7 +3,6 @@ package com.ferum_bot.quotesapi.models.entity
 import com.fasterxml.jackson.annotation.JsonFormat
 import org.hibernate.Hibernate
 import java.time.LocalDateTime
-import javax.annotation.processing.Generated
 import javax.persistence.*
 
 @Entity
