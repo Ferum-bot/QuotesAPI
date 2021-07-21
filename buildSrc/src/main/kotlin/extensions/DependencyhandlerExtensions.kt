@@ -41,6 +41,7 @@ fun DependencyHandler.addAllStarters() {
     implementation(Dependencies.SPRING_BOOT_WEB)
     implementation(Dependencies.SPRING_BOOT_JPA)
     implementation(Dependencies.SPRING_BOOT_REST)
+    implementation(Dependencies.SPRING_BOOT_ACTUATOR)
     developmentOnly(Dependencies.SPRING_BOOT_DEV_TOOLS)
     annotationProcessor(Dependencies.SPRING_BOOT_CONFIG_PROCESSOR)
     testImplementation(Dependencies.SPRING_BOOT_TEST)

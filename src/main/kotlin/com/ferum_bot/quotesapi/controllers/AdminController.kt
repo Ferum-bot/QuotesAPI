@@ -6,6 +6,7 @@ import com.ferum_bot.quotesapi.interactors.AdminControllerInteractor
 import com.ferum_bot.quotesapi.models.create_entities.CreateAuthorModel
 import com.ferum_bot.quotesapi.models.create_entities.CreateQuoteModel
 import com.ferum_bot.quotesapi.models.create_entities.CreateTagModel
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -24,6 +25,8 @@ class AdminController {
     @Autowired
     private lateinit var interactor: AdminControllerInteractor
 
+    private val logger = LoggerFactory.getLogger(AdminController::class.java)
+
     @PostMapping("/create/tag")
     fun createNewTag(
         @RequestHeader(value = "Secret-Key", required = true)
@@ -32,6 +35,8 @@ class AdminController {
         @RequestBody(required = true)
         tagToCreate: CreateTagModel,
     ): ResponseEntity<*> {
+        logger.info("Create new tag called with: $tagToCreate")
+
         val keyIsValid = securityHandler.checkTheAdminSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidAdminKey()
@@ -49,6 +54,8 @@ class AdminController {
         @RequestBody(required = true)
         authorToCreate: CreateAuthorModel,
     ): ResponseEntity<*> {
+        logger.info("Create new author called with: $authorToCreate")
+
         val keyIsValid = securityHandler.checkTheAdminSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidAdminKey()
@@ -66,6 +73,8 @@ class AdminController {
         @RequestBody(required = true)
         quoteToCreate: CreateQuoteModel,
     ): ResponseEntity<*> {
+        logger.info("Create new quote called with: $quoteToCreate")
+
         val keyIsValid = securityHandler.checkTheAdminSecretKey(secretKey)
         if (!keyIsValid) {
             return errorHandler.handleInvalidAdminKey()
@@ -77,6 +86,8 @@ class AdminController {
 
     @ExceptionHandler
     fun handleError(ex: Exception): ResponseEntity<*> {
+        logger.error("Handled error: $ex")
+
         return errorHandler.handleBadRequest(ex)
     }
 }

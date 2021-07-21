@@ -1,5 +1,6 @@
 package com.ferum_bot.quotesapi.models.entity
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import org.hibernate.Hibernate
 import java.time.LocalDateTime
 import javax.annotation.processing.Generated
@@ -23,8 +24,10 @@ data class QuoteEntity(
     @JoinColumn(name = "tag_entity_id", referencedColumnName = "id")
     var tag: TagEntity? = null,
 
+    @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     var createdDate: LocalDateTime? = null,
 
+    @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     var updatedDate: LocalDateTime? = null,
 ) {
 

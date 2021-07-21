@@ -8,6 +8,7 @@ object Dependencies {
     const val SPRING_BOOT_JPA = "org.springframework.boot:spring-boot-starter-data-jpa"
     const val SPRING_BOOT_CONFIG_PROCESSOR = "org.springframework.boot:spring-boot-configuration-processor"
     const val SPRING_BOOT_TEST = "org.springframework.boot:spring-boot-starter-test"
+    const val SPRING_BOOT_ACTUATOR = "org.springframework.boot:spring-boot-starter-actuator"
 
     // JSON Converters
     const val JACKSON = "com.fasterxml.jackson.module:jackson-module-kotlin"

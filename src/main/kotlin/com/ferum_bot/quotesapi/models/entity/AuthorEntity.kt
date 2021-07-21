@@ -1,5 +1,6 @@
 package com.ferum_bot.quotesapi.models.entity
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.hibernate.Hibernate
 import java.time.LocalDateTime
@@ -18,8 +19,10 @@ data class AuthorEntity(
     @OneToMany(mappedBy = "author")
     val quotes: MutableList<QuoteEntity> = mutableListOf(),
 
+    @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     var createdDate: LocalDateTime? = null,
 
+    @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     var updatedDate: LocalDateTime? = null,
 ) {
 
