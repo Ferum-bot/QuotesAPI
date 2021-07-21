@@ -35,6 +35,10 @@ dependencies {
     addHelpers()
 }
 
+application {
+    mainClass.set("package com.ferum_bot.quotesapi.application.QuotesApiApplication.kt")
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
