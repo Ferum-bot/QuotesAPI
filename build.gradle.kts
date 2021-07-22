@@ -36,10 +36,6 @@ dependencies {
     addHelpers()
 }
 
-application {
-    mainClass.set("com.ferum_bot.quotesapi.application.QuotesApiApplicationKt")
-}
-
 springBoot {
     mainClass.set("com.ferum_bot.quotesapi.application.QuotesApiApplicationKt")
 }
