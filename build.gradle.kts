@@ -38,18 +38,22 @@ dependencies {
 }
 
 application {
-    mainClass.set("com.ferum_bot.quotesapi.application.QuotesApiApplication")
+    mainClass.set("com.ferum_bot.quotesapi.application.QuotesApiApplicationKt")
+}
+
+springBoot {
+    mainClass.set("com.ferum_bot.quotesapi.application.QuotesApiApplicationKt")
 }
 
 tasks.withType<Jar> {
     manifest {
-        attributes("Main-Class" to "com.ferum_bot.quotesapi.application.QuotesApiApplication")
+        attributes["Start-Class"] = "com.ferum_bot.quotesapi.application.QuotesApiApplicationKt"
     }
 }
 
 tasks.withType<BootJar> {
     manifest {
-        attributes("Main-Class" to "com.ferum_bot.quotesapi.application.QuotesApiApplication")
+        attributes["Start-Class"] = "com.ferum_bot.quotesapi.application.QuotesApiApplicationKt"
     }
 }
 
