@@ -52,6 +52,16 @@ class BaseErrorHandler: ErrorHandler {
     }
 
     override fun handleInvalidAdminKey(): ResponseEntity<QuotesResponse<Nothing>> {
-        TODO("Not yet implemented")
+        val errorText = "Invalid Admin key"
+        val errorResponse = ErrorResponse(
+            statusCode = HttpStatus.FORBIDDEN.value(),
+            errorMessage = errorText,
+            errors = emptyList()
+        )
+        val response = QuotesResponse(
+            data = null,
+            error = errorResponse
+        )
+        return ResponseEntity(response, HttpStatus.FORBIDDEN)
     }
 }
