@@ -28,8 +28,16 @@ import org.springframework.context.annotation.Import
     AdapterConfig::class,
     HerokuConfig::class
 )
-@EntityScan(basePackageClasses = [QuoteEntity::class, AuthorEntity::class, TagEntity::class])
-@EnableJpaRepositories(basePackageClasses = [QuotesDataSource::class, AuthorsDataSource::class, TagsDataSource::class])
+@EntityScan(basePackageClasses = [
+    QuoteEntity::class,
+    AuthorEntity::class,
+    TagEntity::class
+])
+@EnableJpaRepositories(basePackageClasses = [
+    QuotesDataSource::class,
+    AuthorsDataSource::class,
+    TagsDataSource::class
+])
 class QuotesApiApplication
 
 
