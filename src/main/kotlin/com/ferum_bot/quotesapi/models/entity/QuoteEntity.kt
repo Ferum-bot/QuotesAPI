@@ -13,6 +13,7 @@ data class QuoteEntity(
     @Column(name = "id")
     var id: Long? = null,
 
+    @Column(name = "text", length = 5000)
     var text: String,
 
     @ManyToOne

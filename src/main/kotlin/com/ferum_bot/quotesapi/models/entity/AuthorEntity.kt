@@ -13,6 +13,7 @@ data class AuthorEntity(
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null,
 
+    @Column(name = "authorFullName", length = 1000)
     var authorFullName: String,
 
     @JsonIgnore

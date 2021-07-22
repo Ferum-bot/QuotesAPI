@@ -13,6 +13,7 @@ data class TagEntity(
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null,
 
+    @Column(name = "tagName", length = 1000)
     var tagName: String,
 
     @JsonIgnore
