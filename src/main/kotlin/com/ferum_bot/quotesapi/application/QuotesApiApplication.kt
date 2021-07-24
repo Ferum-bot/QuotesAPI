@@ -1,12 +1,7 @@
 package com.ferum_bot.quotesapi.application
 
+import com.ferum_bot.quotesapi.configurations.*
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import com.ferum_bot.quotesapi.configurations.ScanConfig
-import com.ferum_bot.quotesapi.configurations.InteractorsConfig
-import com.ferum_bot.quotesapi.configurations.HandlersConfig
-import com.ferum_bot.quotesapi.configurations.RepositoryConfig
-import com.ferum_bot.quotesapi.configurations.AdapterConfig
-import com.ferum_bot.quotesapi.configurations.HerokuConfig
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import com.ferum_bot.quotesapi.models.entity.QuoteEntity
 import com.ferum_bot.quotesapi.models.entity.AuthorEntity
@@ -26,7 +21,8 @@ import org.springframework.context.annotation.Import
     HandlersConfig::class,
     RepositoryConfig::class,
     AdapterConfig::class,
-    HerokuConfig::class
+    HerokuConfig::class,
+    LoggingConfig::class,
 )
 @EntityScan(basePackageClasses = [
     QuoteEntity::class,

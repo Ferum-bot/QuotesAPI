@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository
 interface AuthorsDataSource: JpaRepository<AuthorEntity, Long> {
 
     @Query(
-        value = "SELECT * FROM author_entity WHERE author_full_name LIKE CONCAT('%', :text, '%')",
+        value = "SELECT * FROM author_entity WHERE author_full_name LIKE CONCAT('%', :text, '%') ORDER BY author_full_name",
         nativeQuery = true,
     )
     fun findAllWhereNameContains(

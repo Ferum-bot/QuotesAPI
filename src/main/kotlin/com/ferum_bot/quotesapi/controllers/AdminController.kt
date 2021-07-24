@@ -6,6 +6,7 @@ import com.ferum_bot.quotesapi.interactors.AdminControllerInteractor
 import com.ferum_bot.quotesapi.models.create_entities.CreateAuthorModel
 import com.ferum_bot.quotesapi.models.create_entities.CreateQuoteModel
 import com.ferum_bot.quotesapi.models.create_entities.CreateTagModel
+import com.ferum_bot.quotesapi.util.logging.ApiLogger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -25,7 +26,8 @@ class AdminController {
     @Autowired
     private lateinit var interactor: AdminControllerInteractor
 
-    private val logger = LoggerFactory.getLogger(AdminController::class.java)
+    @Autowired
+    private lateinit var logger: ApiLogger
 
     @PostMapping("/create/tag")
     fun createNewTag(
@@ -35,14 +37,16 @@ class AdminController {
         @RequestBody(required = true)
         tagToCreate: CreateTagModel,
     ): ResponseEntity<*> {
-        logger.info("Create new tag called with: $tagToCreate")
+        logger.logInfo { "Create new tag called with model: $tagToCreate" }
 
         val keyIsValid = securityHandler.checkTheAdminSecretKey(secretKey)
         if (!keyIsValid) {
+            logger.logInvalidAdminKey(secretKey)
             return errorHandler.handleInvalidAdminKey()
         }
 
         val response = interactor.createNewTag(tagToCreate)
+        logger.logError(response) { "Failed to create new tag with model: $tagToCreate" }
         return ResponseEntity.ok(response)
     }
 
@@ -54,14 +58,16 @@ class AdminController {
         @RequestBody(required = true)
         authorToCreate: CreateAuthorModel,
     ): ResponseEntity<*> {
-        logger.info("Create new author called with: $authorToCreate")
+        logger.logInfo { "Create new author called with model: $authorToCreate" }
 
         val keyIsValid = securityHandler.checkTheAdminSecretKey(secretKey)
         if (!keyIsValid) {
+            logger.logInvalidAdminKey(secretKey)
             return errorHandler.handleInvalidAdminKey()
         }
 
         val response = interactor.createNewAuthor(authorToCreate)
+        logger.logError(response) { "Failed to create new author with model: $authorToCreate" }
         return ResponseEntity.ok(response)
     }
 
@@ -73,20 +79,22 @@ class AdminController {
         @RequestBody(required = true)
         quoteToCreate: CreateQuoteModel,
     ): ResponseEntity<*> {
-        logger.info("Create new quote called with: $quoteToCreate")
+        logger.logInfo { "Create new quote called with model: $quoteToCreate" }
 
         val keyIsValid = securityHandler.checkTheAdminSecretKey(secretKey)
         if (!keyIsValid) {
+            logger.logInvalidAdminKey(secretKey)
             return errorHandler.handleInvalidAdminKey()
         }
 
         val response = interactor.createNewQuote(quoteToCreate)
+        logger.logError(response) { "Failed to create new quote with model: $quoteToCreate" }
         return ResponseEntity.ok(response)
     }
 
     @ExceptionHandler
     fun handleError(ex: Exception): ResponseEntity<*> {
-        logger.error("Handled error: $ex")
+        logger.logError { "Received error: $ex" }
 
         return errorHandler.handleBadRequest(ex)
     }
