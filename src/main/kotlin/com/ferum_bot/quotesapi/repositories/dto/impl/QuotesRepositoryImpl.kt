@@ -8,6 +8,7 @@ import com.ferum_bot.quotesapi.repositories.jpa.QuotesDataSource
 import com.ferum_bot.quotesapi.repositories.jpa.TagsDataSource
 import com.ferum_bot.quotesapi.util.RandomUtil
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 
 class QuotesRepositoryImpl(
     quotesDataSource: QuotesDataSource,
@@ -19,12 +20,14 @@ class QuotesRepositoryImpl(
     QuotesRepository {
 
     override fun getAllQuotes(): Collection<QuoteDTO> {
-        val rawQuotes = quotesDataSource.findAll()
+        val sort = Sort.by("id")
+        val rawQuotes = quotesDataSource.findAll(sort)
         return adapter.adaptQuotes(rawQuotes)
     }
 
     override fun getQuotesFrom(page: Int, size: Int): Collection<QuoteDTO> {
-        val pageRequest = PageRequest.of(page, size)
+        val sort = Sort.by("id")
+        val pageRequest = PageRequest.of(page, size).withSort(sort)
         val resultPage = quotesDataSource.findAll(pageRequest)
         val rawQuotes = resultPage.content
         return adapter.adaptQuotes(rawQuotes)
