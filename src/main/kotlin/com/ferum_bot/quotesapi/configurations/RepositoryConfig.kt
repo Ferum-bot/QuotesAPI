@@ -65,11 +65,7 @@ class RepositoryConfig {
     }
 
     @Bean
-    fun provideAdminRepository(
-        quotesDataSource: QuotesDataSource,
-        tagsDataSource: TagsDataSource,
-        authorsDataSource: AuthorsDataSource,
-    ): AdminRepository {
+    fun provideAdminRepository(): AdminRepository {
         return DefaultAdminRepository(
             quotesDataSource, tagsDataSource, authorsDataSource
         )

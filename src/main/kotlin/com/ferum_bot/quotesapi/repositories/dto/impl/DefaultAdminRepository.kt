@@ -18,7 +18,7 @@ class DefaultAdminRepository(
 ): AdminRepository {
 
     override fun checkThatAuthorExists(author: CreateAuthorModel): Boolean {
-        val authors = authorsDataSource.getAllByAuthorFullName(author.fullName)
+        val authors = authorsDataSource.findAllByAuthorFullName(author.fullName)
         return authors.isNotEmpty()
     }
 

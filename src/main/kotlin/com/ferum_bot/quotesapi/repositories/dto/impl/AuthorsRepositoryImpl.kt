@@ -6,6 +6,7 @@ import com.ferum_bot.quotesapi.repositories.dto.AuthorsRepository
 import com.ferum_bot.quotesapi.repositories.jpa.AuthorsDataSource
 import com.ferum_bot.quotesapi.repositories.jpa.QuotesDataSource
 import com.ferum_bot.quotesapi.repositories.jpa.TagsDataSource
+import com.ferum_bot.quotesapi.util.extensions.getSubPage
 import org.springframework.data.domain.PageRequest
 
 class AuthorsRepositoryImpl(
@@ -36,9 +37,8 @@ class AuthorsRepositoryImpl(
         if (size == 0) {
             return emptyList()
         }
-        val pageRequest = PageRequest.of(page, size)
-        val resultPage = authorsDataSource.getAllAuthorsWhereNameContains(text, pageRequest)
-        val rawAuthors = resultPage.content
+        val rawAuthors = authorsDataSource.findAllWhereNameContains(text)
+            .getSubPage(page, size)
         return adapter.adaptAuthors(rawAuthors)
     }
 }

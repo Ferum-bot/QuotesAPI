@@ -5,14 +5,20 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.query.Param
+import org.springframework.stereotype.Repository
 
+@Repository
 interface AuthorsDataSource: JpaRepository<AuthorEntity, Long> {
 
     @Query(
-        value = "SELECT ALL FROM author_entity WHERE author_full_name=?1",
+        value = "SELECT * FROM author_entity WHERE author_full_name LIKE CONCAT('%', :text, '%')",
         nativeQuery = true,
     )
-    fun getAllAuthorsWhereNameContains(text: String, pageable: Pageable): Page<AuthorEntity>
+    fun findAllWhereNameContains(
+        @Param("text")
+        text: String
+    ): List<AuthorEntity>
 
-    fun getAllByAuthorFullName(text: String): List<AuthorEntity>
+    fun findAllByAuthorFullName(text: String): List<AuthorEntity>
 }

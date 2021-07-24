@@ -4,7 +4,10 @@ import com.ferum_bot.quotesapi.models.entity.QuoteEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
+import org.springframework.data.repository.query.Param
+import org.springframework.stereotype.Repository
 
+@Repository
 interface QuotesDataSource: JpaRepository<QuoteEntity, Long> {
 
     @Query(
@@ -14,16 +17,22 @@ interface QuotesDataSource: JpaRepository<QuoteEntity, Long> {
     fun getAllAvailableIds(): List<Long>
 
     @Query(
-        value = "SELECT ALL FROM QuoteEntity WHERE author.authorFullName = ?1",
+        value = "SELECT * FROM quote_entity WHERE quote_entity.author_entity_id=ANY(SELECT author_entity.id FROM author_entity WHERE author_entity.author_full_name=:authorName)" ,
         nativeQuery = true
     )
-    fun getAllWhereAuthorIs(authorName: String): List<QuoteEntity>
+    fun getAllWhereAuthorIs(
+        @Param("authorName")
+        authorName: String
+    ): List<QuoteEntity>
 
     @Query(
-        value = "SELECT ALL FROM QuoteEntity  WHERE tag.tagName = ?1",
+        value = "SELECT * FROM quote_entity WHERE quote_entity.tag_entity_id=ANY(SELECT tag_entity.id FROM tag_entity WHERE tag_entity.tag_name=:tag)",
         nativeQuery = true,
     )
-    fun getAllWhereTagIs(tag: String): List<QuoteEntity>
+    fun getAllWhereTagIs(
+        @Param("tag")
+        tag: String
+    ): List<QuoteEntity>
 
     fun getAllByText(text: String): List<QuoteEntity>
 }
