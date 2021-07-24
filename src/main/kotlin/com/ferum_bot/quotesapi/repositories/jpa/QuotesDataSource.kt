@@ -17,7 +17,7 @@ interface QuotesDataSource: JpaRepository<QuoteEntity, Long> {
     fun getAllAvailableIds(): List<Long>
 
     @Query(
-        value = "SELECT * FROM quote_entity WHERE quote_entity.author_entity_id=ANY(SELECT author_entity.id FROM author_entity WHERE author_entity.author_full_name=:authorName)" ,
+        value = "SELECT * FROM quote_entity WHERE quote_entity.author_entity_id=ANY(SELECT author_entity.id FROM author_entity WHERE author_entity.author_full_name=:authorName) ORDER BY quote_entity.id" ,
         nativeQuery = true
     )
     fun getAllWhereAuthorIs(
@@ -26,7 +26,7 @@ interface QuotesDataSource: JpaRepository<QuoteEntity, Long> {
     ): List<QuoteEntity>
 
     @Query(
-        value = "SELECT * FROM quote_entity WHERE quote_entity.tag_entity_id=ANY(SELECT tag_entity.id FROM tag_entity WHERE tag_entity.tag_name=:tag)",
+        value = "SELECT * FROM quote_entity WHERE quote_entity.tag_entity_id=ANY(SELECT tag_entity.id FROM tag_entity WHERE tag_entity.tag_name=:tag) ORDER BY quote_entity.id",
         nativeQuery = true,
     )
     fun getAllWhereTagIs(
